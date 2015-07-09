@@ -25,7 +25,7 @@ interface StateMachineInterface
      *
      * @return mixed
      */
-    public function apply($transitionName);
+    public function apply($transitionName, $payload = null);
 
     /**
      * Returns if the transition is applicable

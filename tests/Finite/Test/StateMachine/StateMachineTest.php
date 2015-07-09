@@ -151,6 +151,36 @@ class StateMachineTest extends StateMachineTestCase
         $this->object->apply('t23');
     }
 
+    public function testApplyReturnValue()
+    {
+        $testValue = 'foo';
+        $this->initialize();
+        $transition = $this->getMock('\Finite\Transition\TransitionInterface');
+        $transition->expects($this->atLeastOnce())->method('getName')         ->will($this->returnValue('t23'));
+        $transition->expects($this->once())       ->method('getInitialStates')->will($this->returnValue(array('s2')));
+        $transition->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($testValue))
+        ;
+        $this->object->addTransition($transition);
+        $this->assertEquals($testValue, $this->object->apply('t23'));
+    }
+
+    public function testApplyPayload()
+    {
+        $this->initialize();
+        $transition = $this->getMock('\Finite\Transition\TransitionInterface');
+        $transition->expects($this->atLeastOnce())->method('getName')         ->will($this->returnValue('t23'));
+        $transition->expects($this->once())       ->method('getInitialStates')->will($this->returnValue(array('s2')));
+        $transition->expects($this->once())
+            ->method('process')
+            ->will($this->returnArgument(1))
+        ;
+        $testValue = 'foo';
+        $this->object->addTransition($transition);
+        $this->assertEquals($testValue, $this->object->apply('t23', $testValue));
+    }
+
     public function testGetStates()
     {
         $this->initialize();

@@ -29,10 +29,11 @@ interface TransitionInterface
      * Process the transition
      *
      * @param StateMachineInterface $stateMachine
+     * @param mixed                 $payload
      *
      * @return mixed
      */
-    public function process(StateMachineInterface $stateMachine);
+    public function process(StateMachineInterface $stateMachine, $payload = null);
 
     /**
      * Returns the name of the transition

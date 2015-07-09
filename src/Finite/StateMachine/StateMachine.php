@@ -116,7 +116,7 @@ class StateMachine implements StateMachineInterface
      *
      * @throws Exception\StateException
      */
-    public function apply($transitionName)
+    public function apply($transitionName, $payload = null)
     {
         $transition = $this->getTransition($transitionName);
         $event      = new TransitionEvent($this->getCurrentState(), $transition, $this);
@@ -133,7 +133,7 @@ class StateMachine implements StateMachineInterface
         $this->dispatcher->dispatch(FiniteEvents::PRE_TRANSITION, $event);
         $this->dispatcher->dispatch(FiniteEvents::PRE_TRANSITION . '.' . $transitionName, $event);
 
-        $returnValue = $transition->process($this);
+        $returnValue = $transition->process($this, $payload);
         $this->stateAccessor->setState($this->object, $transition->getState());
         $this->currentState = $this->getState($transition->getState());
 
