@@ -29,14 +29,21 @@ class TransitionEvent extends StateMachineEvent
     protected $initialState;
 
     /**
+     * @var mixed
+     */
+    protected $payload;
+
+    /**
      * @param StateInterface      $initialState
      * @param TransitionInterface $transition
      * @param StateMachine        $stateMachine
+     * @param mixed               $payload
      */
-    public function __construct(StateInterface $initialState, TransitionInterface $transition, StateMachine $stateMachine)
+    public function __construct(StateInterface $initialState, TransitionInterface $transition, StateMachine $stateMachine, $payload = null)
     {
         $this->transition   = $transition;
         $this->initialState = $initialState;
+        $this->payload      = $payload;
 
         parent::__construct($stateMachine);
     }
@@ -68,5 +75,10 @@ class TransitionEvent extends StateMachineEvent
     public function getInitialState()
     {
         return $this->initialState;
+    }
+
+    public function getPayload()
+    {
+        return $this->payload;
     }
 }

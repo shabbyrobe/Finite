@@ -82,7 +82,7 @@ class Transition implements TransitionInterface
     /**
      * @{inheritDoc}
      */
-    public function process(StateMachineInterface $stateMachine, $payload=null)
+    public function process(StateMachineInterface $stateMachine, $payload = null)
     {
     }
 
