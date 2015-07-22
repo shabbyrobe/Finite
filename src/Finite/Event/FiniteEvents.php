@@ -33,6 +33,26 @@ final class FiniteEvents
         /**
          * Fired when a transition test is made.
          */
-        TEST_TRANSITION  = 'finite.test_transition'
+        TEST_TRANSITION  = 'finite.test_transition',
+
+        /**
+         * Fired before any transition into a specific state
+         */
+        PRE_ENTER_STATE = 'finite.pre_enter_state',
+
+        /**
+         * Fired before any transition into a specific state
+         */
+        POST_ENTER_STATE = 'finite.post_enter_state',
+
+        /**
+         * Fired before any transition out of a specific state
+         */
+        PRE_LEAVE_STATE = 'finite.pre_leave_state',
+
+        /**
+         * Fired after any transition out of a specific state
+         */
+        POST_LEAVE_STATE = 'finite.post_leave_state'
     ;
 }
