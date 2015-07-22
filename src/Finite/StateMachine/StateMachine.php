@@ -130,8 +130,10 @@ class StateMachine implements StateMachineInterface
             ));
         }
 
+        // call getName() rather than __toString() as getName may return a toStringable object itself
+        $fromState = $this->currentState->getName();
+
         $toState   = $transition->getState();
-        $fromState = $this->currentState;
 
         $this->dispatcher->dispatch(FiniteEvents::PRE_TRANSITION, $event);
         $this->dispatcher->dispatch(FiniteEvents::PRE_TRANSITION . '.' . $transitionName, $event);
